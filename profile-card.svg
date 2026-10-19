@@ -1,5 +1,27 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="840" height="392" viewBox="0 0 840 392" font-family="Tahoma, Verdana, 'Segoe UI', sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" width="840" height="392" viewBox="0 0 840 392">
+  <style>
+    text { font-family: Tahoma, Verdana, "Segoe UI", sans-serif; font-size: 13px; fill: #2f2d2a; }
+
+    .window   { fill: #eeebe2; }
+    .frame    { fill: #6b7347; }
+    .title    { font-weight: bold; fill: #ffffff; }
+    .title-shadow { font-weight: bold; fill: #000000; opacity: 0.35; }
+
+    .name     { font-size: 22px; font-weight: bold; fill: #585d33; }
+    .muted    { fill: #57524f; }
+    .accent   { font-weight: bold; fill: #585d33; }
+
+    .group       { fill: none; stroke: #cdc6b6; }
+    .group-label { font-size: 12px; fill: #7d5f7c; }
+
+    .btn       { stroke: #f4f1e6; }
+    .btn-icon  { fill: none; stroke: #ffffff; stroke-width: 2; }
+    .status    { font-size: 11px; fill: #57524f; }
+    .separator { stroke: #c9c2b1; }
+  </style>
+
   <defs>
+    <!-- olive title bar, like the XP "Olive Green" theme -->
     <linearGradient id="titlebar" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="#c3c99d"/>
       <stop offset="0.12" stop-color="#959e68"/>
@@ -7,11 +29,11 @@
       <stop offset="0.9" stop-color="#8e9862"/>
       <stop offset="1" stop-color="#6c7546"/>
     </linearGradient>
-    <linearGradient id="btnBlue" x1="0" y1="0" x2="1" y2="1">
+    <linearGradient id="btn" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#b5bf97"/>
       <stop offset="1" stop-color="#7f8b5c"/>
     </linearGradient>
-    <linearGradient id="btnRed" x1="0" y1="0" x2="1" y2="1">
+    <linearGradient id="btn-close" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#d7a08a"/>
       <stop offset="1" stop-color="#a65d4b"/>
     </linearGradient>
@@ -19,62 +41,68 @@
       <stop offset="0" stop-color="#f3f0e7"/>
       <stop offset="1" stop-color="#e0dbcd"/>
     </linearGradient>
+
+    <rect id="title-btn" width="21" height="21" rx="3"/>
   </defs>
 
-  <!-- Window frame -->
-  <rect x="1" y="1" width="838" height="390" rx="8" fill="#6b7347"/>
-  <rect x="4" y="30" width="832" height="358" fill="#eeebe2"/>
+  <!-- window -->
+  <rect class="frame" x="1" y="1" width="838" height="390" rx="8"/>
+  <rect class="window" x="4" y="30" width="832" height="358"/>
 
-  <!-- Title bar -->
+  <!-- title bar -->
   <path d="M1 9 a8 8 0 0 1 8 -8 h822 a8 8 0 0 1 8 8 v21 h-838 z" fill="url(#titlebar)"/>
-  <rect x="12" y="8" width="15" height="15" rx="2" fill="#eeebe2" stroke="#ffffff" stroke-width="1"/>
-  <rect x="14" y="10" width="11" height="3" fill="#a98ea8"/>
-  <text x="35" y="21" font-size="13" font-weight="bold" fill="#000000" opacity="0.35">Dmytro Lytvak</text>
-  <text x="34" y="20" font-size="13" font-weight="bold" fill="#ffffff">Dmytro Lytvak</text>
-
-  <!-- Title bar buttons -->
-  <g stroke="#f4f1e6" stroke-width="1">
-    <rect x="761" y="5" width="21" height="21" rx="3" fill="url(#btnBlue)"/>
-    <rect x="785" y="5" width="21" height="21" rx="3" fill="url(#btnBlue)"/>
-    <rect x="809" y="5" width="21" height="21" rx="3" fill="url(#btnRed)"/>
+  <g transform="translate(12 8)">
+    <rect class="window" width="15" height="15" rx="2" stroke="#ffffff"/>
+    <rect x="2" y="2" width="11" height="3" fill="#a98ea8"/>
   </g>
-  <rect x="766" y="18" width="8" height="3" fill="#ffffff"/>
-  <rect x="790" y="10" width="11" height="11" fill="none" stroke="#ffffff" stroke-width="2"/>
-  <path d="M814 10 l11 11 M825 10 l-11 11" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round"/>
+  <text class="title-shadow" x="35" y="21">Dmytro Lytvak</text>
+  <text class="title" x="34" y="20">Dmytro Lytvak</text>
 
-  <!-- Header -->
-  <text x="24" y="66" font-size="22" font-weight="bold" fill="#585d33">Dmytro Lytvak</text>
-  <text x="24" y="88" font-size="13" fill="#57524f">Associate QA Automation Engineer · GlobalLogic</text>
-
-  <!-- Group box: Current work -->
-  <rect x="20" y="110" width="800" height="92" rx="3" fill="none" stroke="#cdc6b6"/>
-  <rect x="30" y="102" width="98" height="16" fill="#eeebe2"/>
-  <text x="34" y="114" font-size="12" fill="#7d5f7c">Current work</text>
-  <g font-size="13" fill="#2f2d2a">
-    <text x="36" y="138">API test automation for a payment platform, as the only automation engineer on a two-person QA team.</text>
-    <text x="36" y="160">I own the test framework: API clients on a shared base class, pydantic schemas, test data factories, DB checks.</text>
-    <text x="36" y="182">Focus on edge cases and exception scenarios, not just the happy path.</text>
+  <!-- minimize / maximize / close -->
+  <g transform="translate(761 5)">
+    <use href="#title-btn" class="btn" fill="url(#btn)"/>
+    <use href="#title-btn" class="btn" fill="url(#btn)" x="24"/>
+    <use href="#title-btn" class="btn" fill="url(#btn-close)" x="48"/>
+    <path class="btn-icon" d="M5 14.5 h8"/>
+    <rect class="btn-icon" x="29" y="5" width="11" height="11"/>
+    <path class="btn-icon" d="M53 5 l11 11 M64 5 l-11 11" stroke-linecap="round"/>
   </g>
 
-  <!-- Group box: Stack -->
-  <rect x="20" y="222" width="800" height="70" rx="3" fill="none" stroke="#cdc6b6"/>
-  <rect x="30" y="214" width="46" height="16" fill="#eeebe2"/>
-  <text x="34" y="226" font-size="12" fill="#7d5f7c">Stack</text>
-  <g font-size="13" fill="#2f2d2a">
-    <text x="36" y="250"><tspan font-weight="bold" fill="#585d33">Now:</tspan>  Python · pytest · Requests · pydantic · polyfactory · PostgreSQL</text>
-    <text x="36" y="272"><tspan font-weight="bold" fill="#585d33">Earlier:</tspan>  Java · JUnit 5 · Playwright · REST Assured · Postman · Allure</text>
+  <!-- header -->
+  <text class="name" x="24" y="66">Dmytro Lytvak</text>
+  <text class="muted" x="24" y="88">Associate QA Automation Engineer - GlobalLogic</text>
+
+  <!-- each group box: frame, label with a background patch to cut the border, then lines of text -->
+  <g transform="translate(20 110)">
+    <rect class="group" width="800" height="92" rx="3"/>
+    <rect class="window" x="10" y="-8" width="98" height="16"/>
+    <text class="group-label" x="14" y="4">Current work</text>
+    <text x="16" y="28">API test automation for a payment platform.</text>
+    <text x="16" y="50">Building and maintaining the test framework: API clients, pydantic schemas, test data factories, DB checks.</text>
+    <text x="16" y="72">Focus on edge cases and exception scenarios, not just the happy path.</text>
   </g>
 
-  <!-- Group box: Background -->
-  <rect x="20" y="312" width="800" height="44" rx="3" fill="none" stroke="#cdc6b6"/>
-  <rect x="30" y="304" width="82" height="16" fill="#eeebe2"/>
-  <text x="34" y="316" font-size="12" fill="#7d5f7c">Background</text>
-  <text x="36" y="340" font-size="13" fill="#2f2d2a">Came to QA from software development, with a few game prototypes in Godot along the way.</text>
+  <g transform="translate(20 222)">
+    <rect class="group" width="800" height="70" rx="3"/>
+    <rect class="window" x="10" y="-8" width="46" height="16"/>
+    <text class="group-label" x="14" y="4">Stack</text>
+    <text x="16" y="28"><tspan class="accent">Now:</tspan>  Python - pytest - Requests - pydantic - polyfactory - PostgreSQL</text>
+    <text x="16" y="50"><tspan class="accent">Earlier:</tspan>  Java - JUnit 5 - Playwright - REST Assured - Postman - Allure</text>
+  </g>
 
-  <!-- Status bar -->
-  <rect x="4" y="366" width="832" height="22" fill="url(#statusbar)"/>
-  <line x1="4" y1="366" x2="836" y2="366" stroke="#c9c2b1"/>
-  <line x1="640" y1="369" x2="640" y2="385" stroke="#c9c2b1"/>
-  <text x="12" y="381" font-size="11" fill="#57524f">github.com/lytvakdmytro</text>
-  <text x="650" y="381" font-size="11" fill="#57524f">Ukraine · GMT+2</text>
+  <g transform="translate(20 312)">
+    <rect class="group" width="800" height="44" rx="3"/>
+    <rect class="window" x="10" y="-8" width="82" height="16"/>
+    <text class="group-label" x="14" y="4">Background</text>
+    <text x="16" y="28">Studied software development before moving into QA, and built a few game prototypes in Godot along the way.</text>
+  </g>
+
+  <!-- status bar -->
+  <g transform="translate(4 366)">
+    <rect width="832" height="22" fill="url(#statusbar)"/>
+    <line class="separator" x2="832"/>
+    <line class="separator" x1="636" y1="3" x2="636" y2="19"/>
+    <text class="status" x="8" y="15">github.com/lytvakdmytro</text>
+    <text class="status" x="646" y="15">Ukraine - GMT+2</text>
+  </g>
 </svg>
