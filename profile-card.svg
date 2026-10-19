@@ -55,8 +55,8 @@
     <rect class="window" width="15" height="15" rx="2" stroke="#ffffff"/>
     <rect x="2" y="2" width="11" height="3" fill="#a98ea8"/>
   </g>
-  <text class="title-shadow" x="35" y="21">Dmytro Lytvak</text>
-  <text class="title" x="34" y="20">Dmytro Lytvak</text>
+  <text class="title-shadow" x="35" y="21">About Me</text>
+  <text class="title" x="34" y="20">About Me</text>
 
   <!-- minimize / maximize / close -->
   <g transform="translate(761 5)">
